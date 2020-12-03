@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Change Title and Favicon" />
+  <title>Original Title</title>
+
+  <script type="text/javascript">
+    /**
+     * The following code will modify the title of the browser tab on the "blur" event
+     * and change it back to the original on the "focus" event.
+     */
+  
+    let origTitle = document.title; // save original title in variable
+    const favicon = document.querySelector('[rel=icon]'); // select favicon element
+    const origFavicon = favicon.href; // save original favicon
+  
+    function oldFavicon() {
+      document.title = origTitle; // set document title to original
+      favicon.href = origFavicon; // set favicon to original
+      clearInterval(interval); // clear the interval
+    }
+  
+    var rotator = favicon,
+      dir = 'favicons/',
+      delayInSeconds = 1,
+      numOfImg = 0,
+      limit = 1,
+      interval;
+  
+    function newFavicon() {
+      document.title = 'New Title';
+      interval = setInterval(function () {
+        rotator.href = dir + 'favicon' + numOfImg + '.png';
+        numOfImg = (numOfImg === limit) ? 0 : ++numOfImg;
+      }, delayInSeconds * 500);
+    }
+  
+    // Bind functions to blur and focus events
+    window.onblur = newFavicon;
+    window.onfocus = oldFavicon;
+  </script>
+  
+  
+</head>
+
+<body>
+  <h1>Change favicon with javascript</h1>
+</body>
+
+</html>
